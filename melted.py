@@ -162,8 +162,6 @@ def __main__():
                 with meltodown(url, headers=header, timeout=30) as scrap:
                     try:
                         scrap.get()
-                    except Exception as e:
-                        print(e)
                     except:
                         pass
             else:
@@ -200,8 +198,6 @@ def __main__():
                 with meltodown(url, headers=header, timeout=30, data=data) as scrap:
                     try:
                         scrap.post(data=data)
-                    except Exception as e:
-                        print(e)
                     except:
                         pass
             else:
