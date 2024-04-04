@@ -218,7 +218,7 @@ def __main__():
         timer = threading.Thread(target=countdown, args=(t,))
         timer.start()
         with Pool(350) as mp:
-            mp.map(__I__, url, threads, select, pr_path, method)
+            mp.map(__I__(url, threads, select, pr_path, method))
         timer.join()
 if __name__ == '__main__':
     clear()
