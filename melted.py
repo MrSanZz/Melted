@@ -138,7 +138,7 @@ def __main__():
                 thread = threading.Thread(target=__A__, args=(url, select, pr_path, method))
                 thread.start()
         with Pool(150) as multibot:
-            multibot.mp(send, threads)
+            multibot.map(send, threads)
     def __A__(url, select, pr_path, method):
         def get():
             if select.lower() == 'y':
