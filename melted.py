@@ -133,12 +133,9 @@ class meltodown:
         return self._send_request('POST', data, **kwargs)
 def __main__():
     def __I__(url, threads, select, pr_path, method):
-        def send(threads):
-            for _ in range(int(threads)):
-                thread = threading.Thread(target=__A__, args=(url, select, pr_path, method))
-                thread.start()
-        with Pool(150) as multibot:
-            multibot.map(send, threads)
+          for _ in range(int(threads)):
+              thread = threading.Thread(target=__A__, args=(url, select, pr_path, method))
+              thread.start()
     def __A__(url, select, pr_path, method):
         def get():
             if select.lower() == 'y':
