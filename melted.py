@@ -124,7 +124,7 @@ class meltodown:
             response.raise_for_status()
             return response.text
         except Exception as e:
-            raise Exception(f"Request error occurred: {str(e)}")
+            pass
 
     def get(self, **kwargs):
         return self._send_request('GET', **kwargs)
