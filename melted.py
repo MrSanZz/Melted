@@ -115,7 +115,7 @@ class meltodown:
                     response = requests.get(self.url, headers=headers, timeout=self.timeout, proxies=self.proxies)
                 elif method == 'POST':
                     response = self.scraper.post(self.url, headers=headers, data=data, timeout=self.timeout, proxies=self.proxies)
-                    response = requests.get(self.url, headers=headers, data=data, timeout=self.timeout, proxies=self.proxies)
+                    response = requests.post(self.url, headers=headers, data=data, timeout=self.timeout, proxies=self.proxies)
                 else:
                     raise ValueError("Invalid HTTP method specified")
             else:
